@@ -11,106 +11,21 @@
 
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
   
-<style>
-  body
-{
-background-position: center;
-background-size: cover;
-}
 
-.heading
-{
-font-size: 23px;
-width: 100%;
-margin: 0px;
-}
+ 
 
-#status
-{
-font-size: 18px;
-}
 
-canvas
-{
-box-shadow: 10px 10px 10px grey;
-border-radius: 10px;
-}
-a
-{
-  float:right;
-  font-size: 20px !important;
-  margin: 5px;
-  background: black;
-  cursor: pointer;
-  color: white;
-}
-a:hover
-{
-  color:red !important;
-}
-
-</style>
 </head>
 
-<body background="bg6.jpg">
+<body background="background.jpg">
 <center>
   <h1 class="btn btn-info heading">Demostración de Detección de objetos</h1>
-  <a href="index.html" class="btn">Atrás</a>
+  <div><a href="index.html" class="btn">Atrás</a></div>
   <br><br>
   <h3 id="status" class="btn btn-danger"></h3>
 </center>
 
-<script>
-  objectDetector= "";
-
-img = "";
-objects = [];
-status = "";
-
-function preload(){
-  img = loadImage('dog_cat.jpg');
-}
-
-
-function setup() {
-  canvas = createCanvas(640, 420);
-  canvas.center();
-  objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-  document.getElementById("status").innerHTML = "Estatus: detectando objetos";
-}
-
-function modelLoaded() {
-  console.log("¡Modelo cargado!")
-  status = true;
-  objectDetector.detect(img, gotResult);
-}
-
-function gotResult(error, results) {
-  if (error) {
-    console.log(error);
-  }
-  console.log(results);
-  objects = results;
-}
-
-
-function draw() {
-  if (status != undefined) {
-  	  image(img, 0, 0, 640, 420);
-    for (var i = 0; i < objects.length; i++) {
-      document.getElementById("status").innerHTML = "Estatus: objetos detectados";
-
-      fill(255, 0, 0);
-      percent = floor(objects[i].confidence * 100);
-      text(objects[i].label + " " + percent + "%", objects[i].x + 5, objects[i].y + 15);
-      noFill();
-      stroke(255, 0, 0);
-      rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
-    }
-  }
-}
-
-</script>
+<script src="main.js"></script>
 
 </body>
 
